@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="module" version="3.1.0" client="site" method="upgrade">
+  <name>MOD_IMAGE</name>
+  <author>The Adept Traveler</author>
+  <creationDate>April 2021</creationDate>
+  <copyright>Copyright (C) 2021 - 2022 The Adept Traveler, Inc. All rights reserved.</copyright>
+  <license>BSD 2 Clause; see LICENSE.txt</license>
+  <authorEmail>joomla@adept.travel</authorEmail>
+  <authorUrl>adept.travel</authorUrl>
+  <version>1.0.0</version>
+  <description>MOD_IMAGE_DESC</description>
+
+  <languages>
+    <language tag="en-GB">language/en-GB/en-GB.mod_image.ini</language>
+    <language tag="en-GB">language/en-GB/en-GB.mod_image.sys.ini</language>
+  </languages>
+
+  <files>
+    <filename>mod_image.xml</filename>
+    <filename module="mod_image">mod_image.php</filename>
+    <filename>index.html</filename>
+    <filename>tmpl/default.php</filename>
+    <filename>tmpl/index.html</filename>
+  </files>
+
+  <config>
+    <fields name="params">
+      <fieldset
+        name="basic"
+        label="MOD_IMAGE_CONFIG_TAB_BASIC_LABEL">
+
+        <field
+          name="image_src"
+          type="media"
+          directory="stories"
+          label="MOD_IMAGE_CONFIG_IMAGE_SRC_LABEL"
+          description="MOD_IMAGE_CONFIG_IMAGE_SRC_DESC"
+        />
+
+        <field
+          name="image_alt"
+          type="text"
+          label="MOD_IMAGE_CONFIG_IMAGE_ALT_LABEL"
+          description="MOD_IMAGE_CONFIG_IMAGE_ALT_DESC"
+          default=""
+          filter="string"/>
+
+        <field
+          name="image_css"
+          type="text"
+          label="MOD_IMAGE_CONFIG_IMAGE_CSS_LABEL"
+          description="MOD_IMAGE_CONFIG_IMAGE_CSS_DESC"
+          default=""
+          filter="string" />
+
+        <field
+          name="spacer_lazyload"
+          type="spacer"
+          hr="true" />
+
+        <field
+          name="lazyload"
+          type="radio"
+          class="btn-group btn-group-yesno"
+          default="0"
+          label="MOD_IMAGE_CONFIG_LAZYLOAD_LABEL"
+          description="MOD_IMAGE_CONFIG_LAZYLOAD_DESC">
+
+          <option value="1">JYES</option>
+          <option value="0">JNO</option>
+        </field>
+
+        <field
+          name="spacer_container"
+          type="spacer"
+          hr="true" />
+
+        <field
+          name="container"
+          type="radio"
+          class="btn-group btn-group-yesno"
+          default="0"
+          label="MOD_IMAGE_CONFIG_CONTAINER_LABEL"
+          description="MOD_IMAGE_CONFIG_CONTAINER_DESC">
+
+          <option value="1">JYES</option>
+          <option value="0">JNO</option>
+        </field>
+
+        <field
+          name="container_tag"
+          type="moduletag"
+        	label="MOD_IMAGE_CONFIG_CONTAINER_TAG_LABEL"
+        	description="MOD_IMAGE_CONFIG_CONTAINER_TAG_DESC"
+        	default="div"
+          showon="container:1" />
+
+        <field
+          name="container_css"
+          type="text"
+          label="MOD_IMAGE_CONFIG_CONTAINER_CSS_LABEL"
+          description="MOD_IMAGE_CONFIG_CONTAINER_CSS_DESC"
+          default=""
+          filter="string"
+          showon="container:1" />
+
+        <field
+          name="spacer_link"
+          type="spacer"
+          hr="true" />
+
+        <field
+          name="link_type"
+          type="radio"
+          class="btn-group btn-group-yesno"
+          label="MOD_IMAGE_CONFIG_LINK_TYPE_LABEL"
+          description="MOD_IMAGE_CONFIG_LINK_TYPE_DESC"
+          default="0">
+
+          <option value="custom">MOD_IMAGE_CONFIG_OPTION_LINK_TYPE_CUSTOM</option>
+          <option value="menuitem">MOD_IMAGE_CONFIG_OPTION_LINK_TYPE_MENUITEM</option>
+          <option value="0">MOD_IMAGE_CONFIG_OPTION_LINK_TYPE_NONE</option>
+        </field>
+
+        <field
+          name="link_custom"
+          type="url"
+          default=""
+          label="MOD_IMAGE_CONFIG_LINK_CUSTOM_LABEL"
+          description="MOD_IMAGE_CONFIG_LINK_CUSTOM_DESC"
+          size="10"
+          showon="link_type:custom" />
+
+        <field
+          name="link_menu_item"
+          type="menuitem"
+          default=""
+          label="MOD_IMAGE_CONFIG_LINK_MENUITEM_LABEL"
+          description="MOD_IMAGE_CONFIG_LINK_MENUITEM_DESC"
+          showon="link_type:menuitem"
+          published="1" />
+
+        <field
+          name="link_target"
+          type="radio"
+          class="btn-group btn-group-yesno"
+          label="MOD_IMAGE_CONFIG_LINK_TARGET_LABEL"
+          description="MOD_IMAGE_CONFIG_LINK_TARGET_DESC"
+          default="0"
+          showon="link_type:custom[OR]link_type:menuitem">
+
+          <option value="1">JYES</option>
+          <option value="0">JNO</option>
+        </field>
+
+        <field
+          name="link_css"
+          type="text"
+          label="MOD_IMAGE_CONFIG_LINK_CSS_LABEL"
+          description="MOD_IMAGE_CONFIG_LINK_CSS_DESC"
+          default=""
+          filter="string"
+          showon="link_type:custom[OR]link_type:menuitem" />
+
+        <field
+          name="link_title"
+          type="text"
+          label="MOD_IMAGE_CONFIG_LINK_TITLE_LABEL"
+          description="MOD_IMAGE_CONFIG_LINK_TITLE_DESC"
+          default=""
+          filter="string"
+          showon="link_type:custom[OR]link_type:menuitem" />
+
+        <field
+          name="link_rel"
+          type="list"
+          label="MOD_IMAGE_CONFIG_LINK_REL_LABEL"
+          description="MOD_IMAGE_CONFIG_LINK_REL_DESC"
+          default=""
+          showon="link_type:custom[OR]link_type:menuitem">
+
+          <option value="">MOD_IMAGE_CONFIG_OPTION_LINK_REL_NONE</option>
+          <option value="alternate">MOD_IMAGE_CONFIG_OPTION_LINK_REL_ALTERNATE</option>
+          <option value="author">MOD_IMAGE_CONFIG_OPTION_LINK_REL_AUTHOR</option>
+          <option value="bookmark">MOD_IMAGE_CONFIG_OPTION_LINK_REL_BOOKMARK</option>
+          <option value="external">MOD_IMAGE_CONFIG_OPTION_LINK_REL_EXTERNAL</option>
+          <option value="help">MOD_IMAGE_CONFIG_OPTION_LINK_REL_HELP</option>
+          <option value="license">MOD_IMAGE_CONFIG_OPTION_LINK_REL_LICENSE</option>
+          <option value="next">MOD_IMAGE_CONFIG_OPTION_LINK_REL_NEXT</option>
+          <option value="nofollow">MOD_IMAGE_CONFIG_OPTION_LINK_REL_NOFOLLOW</option>
+          <option value="noreferrer">MOD_IMAGE_CONFIG_OPTION_LINK_REL_NOREFERRER</option>
+          <option value="noopener">MOD_IMAGE_CONFIG_OPTION_LINK_REL_NOOPENER</option>
+          <option value="prev">MOD_IMAGE_CONFIG_OPTION_LINK_REL_PREV</option>
+          <option value="search">MOD_IMAGE_CONFIG_OPTION_LINK_REL_SEARCH</option>
+          <option value="tag">MOD_IMAGE_CONFIG_OPTION_LINK_REL_TAG	</option>
+        </field>
+      </fieldset>
+
+      <fieldset
+        name="text"
+        label="MOD_IMAGE_CONFIG_TAB_TEXT_LABEL">
+
+        <field
+          name="text_heading"
+          type="text"
+          label="MOD_IMAGE_CONFIG_TEXT_HEADING_LABEL"
+          description="MOD_IMAGE_CONFIG_TEXT_HEADING_DESC"
+          default=""
+          filter="string" />
+
+        <field
+          name="text_heading_tag"
+          type="headertag"
+  	      label="MOD_IMAGE_CONFIG_TEXT_HEADING_TAG_LABEL"
+  	      description="MOD_IMAGE_CONFIG_TEXT_HEADING_TAG_DESC"
+  	      default="h3" />
+
+        <field
+          name="text_subheading"
+          type="text"
+          label="MOD_IMAGE_CONFIG_TEXT_SUBHEADING_LABEL"
+          description="MOD_IMAGE_CONFIG_TEXT_SUBHEADING_DESC"
+          default=""
+          filter="string" />
+
+        <field
+          name="text_subheading_tag"
+          type="headertag"
+  	      label="MOD_IMAGE_CONFIG_TEXT_SUBHEADING_TAG_LABEL"
+  	      description="MOD_IMAGE_CONFIG_TEXT_SUBHEADING_TAG_DESC"
+  	      default="h4" />
+
+        <field
+          name="text_content"
+          type="editor"
+          label="MOD_IMAGE_CONFIG_TEXT_CONTENT_LABEL"
+          description="MOD_IMAGE_CONFIG_TEXT_CONTENT_DESC"
+          default=""
+          filter="safehtml" />
+
+
+        <field
+          name="link_text"
+          type="text"
+          label="MOD_IMAGE_CONFIG_LINK_TEXT_LABEL"
+          description="MOD_IMAGE_CONFIG_LINK_TEXT_DESC"
+          default=""
+          filter="string"
+          showon="link_type!:0" />
+      </fieldset>
+
+      <fieldset name="advanced">
+        <field
+          name="layout"
+          type="modulelayout"
+          label="JFIELD_ALT_LAYOUT_LABEL"
+          description="JFIELD_ALT_MODULE_LAYOUT_DESC" />
+
+        <field
+          name="moduleclass_sfx"
+          type="textarea"
+          label="COM_MODULES_FIELD_MODULECLASS_SFX_LABEL"
+          description="COM_MODULES_FIELD_MODULECLASS_SFX_DESC"
+          rows="3" />
+
+        <field
+          name="cache"
+          type="list"
+          label="COM_MODULES_FIELD_CACHING_LABEL"
+          description="COM_MODULES_FIELD_CACHING_DESC"
+          default="1"
+          filter="integer">
+
+          <option value="1">JGLOBAL_USE_GLOBAL</option>
+          <option value="0">COM_MODULES_FIELD_VALUE_NOCACHING</option>
+        </field>
+
+        <field
+          name="cache_time"
+          type="number"
+          label="COM_MODULES_FIELD_CACHE_TIME_LABEL"
+          description="COM_MODULES_FIELD_CACHE_TIME_DESC"
+          default="900"
+          filter="integer" />
+
+        <field
+          name="cachemode"
+          type="hidden"
+          default="itemid">
+
+          <option value="itemid"></option>
+        </field>
+      </fieldset>
+    </fields>
+  </config>
+</extension>
